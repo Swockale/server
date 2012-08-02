@@ -293,3 +293,18 @@ bool ChatHandler::HandleServerMotdCommand(char* /*args*/)
     PSendSysMessage(LANG_MOTD_CURRENT, sWorld.GetMotd());
     return true;
 }
+
+bool ChatHandler::HandleXPRateCommand(char* args)
+{
+	Player* pPlayer = m_session->GetPlayer();
+	uint32 rate = 1;
+	if(!ExtractUInt32(&args,rate))
+		return false;
+	if(rate > 6)
+	{
+		PSendSysMessage("You cannot extend your rate higher then *6.");
+	}
+
+	pPlayer->SetXPRate(rate);
+	return true;
+}

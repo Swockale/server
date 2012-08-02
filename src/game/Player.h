@@ -847,6 +847,12 @@ class MANGOS_DLL_SPEC Player : public Unit
     public:
         explicit Player (WorldSession *session);
         ~Player ( );
+	private:
+		uint8 XPRate;
+	public:
+
+		uint8 GetXPRate() { return XPRate; }
+		void SetXPRate(uint8 rate) { XPRate = rate; }
 
         void CleanupsBeforeDelete();
 

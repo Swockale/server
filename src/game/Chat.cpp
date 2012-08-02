@@ -578,6 +578,7 @@ ChatCommand * ChatHandler::getCommandTable()
         { "info",           SEC_PLAYER,         true,  &ChatHandler::HandleServerInfoCommand,          "", NULL },
         { "log",            SEC_CONSOLE,        true,  NULL,                                           "", serverLogCommandTable },
         { "motd",           SEC_PLAYER,         true,  &ChatHandler::HandleServerMotdCommand,          "", NULL },
+		{ "xprate",         SEC_PLAYER,         true,  &ChatHandler::HandleXPRateCommand,              "", NULL },
         { "plimit",         SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleServerPLimitCommand,        "", NULL },
         { "restart",        SEC_ADMINISTRATOR,  true,  NULL,                                           "", serverRestartCommandTable },
         { "shutdown",       SEC_ADMINISTRATOR,  true,  NULL,                                           "", serverShutdownCommandTable },

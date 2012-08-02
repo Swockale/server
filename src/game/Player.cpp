@@ -356,6 +356,7 @@ UpdateMask Player::updateVisualBits;
 
 Player::Player (WorldSession *session): Unit(), m_mover(this), m_camera(this), m_reputationMgr(this)
 {
+	XPRate = 1;
     m_transport = 0;
 
     m_speakTime = 0;
@@ -2282,6 +2283,7 @@ void Player::GiveXP(uint32 xp, Unit* victim)
 
     // XP resting bonus for kill
     uint32 rested_bonus_xp = victim ? GetXPRestBonus(xp) : 0;
+	xp = xp*GetXPRate();
 
     SendLogXPGain(xp,victim,rested_bonus_xp);
 
