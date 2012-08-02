@@ -301,10 +301,9 @@ bool ChatHandler::HandleXPRateCommand(char* args)
 	if(!ExtractUInt32(&args,rate))
 		return false;
 	if(rate > 6)
-	{
 		PSendSysMessage("You cannot extend your rate higher then *6.");
-	}
 
 	pPlayer->SetXPRate(rate);
+	PSendSysMessage("Your xp rate was set to %u",rate);
 	return true;
 }
