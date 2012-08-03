@@ -652,6 +652,7 @@ ChatCommand * ChatHandler::getCommandTable()
 
         { "xprate",         SEC_PLAYER,         true,  &ChatHandler::HandleXPRateCommand,              "", NULL },
         { "buggedquest",    SEC_PLAYER,         true,  &ChatHandler::HandleBuggedQuestCommand,         "", NULL },
+        { "listbuggedquest",SEC_MODERATOR,      true,  &ChatHandler::HandleBuggedQuestListCommand,     "", NULL },
         { "aura",           SEC_ADMINISTRATOR,  false, &ChatHandler::HandleAuraCommand,                "", NULL },
         { "unaura",         SEC_ADMINISTRATOR,  false, &ChatHandler::HandleUnAuraCommand,              "", NULL },
         { "announce",       SEC_MODERATOR,      true,  &ChatHandler::HandleAnnounceCommand,            "", NULL },

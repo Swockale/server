@@ -442,3 +442,25 @@ bool ChatHandler::HandleBuggedQuestCommand(char* args)
 
     return true;
 }
+
+bool ChatHandler::HandleBuggedQuestListCommand(char* /*args*/)
+{
+    Player* pPlayer = m_session->GetPlayer();
+    QueryResult* result = WorldDatabase.PQuery("SELECT entry, reporter FROM quest_bugged WHERE confirmed = 0");
+    if (result)
+    {
+        do
+        {
+            Field* fields = result->Fetch();
+            uint32 QID = fields[0].GetUInt32();
+            uint32 PGUID = fields[1].GetUInt32();
+            Quest const* qinfo = sObjectMgr.GetQuestTemplate(QID);
+            ObjectGuid ob;
+            ob.Set(PGUID);
+            Player* pPlayer = sObjectMgr.GetPlayer(ob);
+            PSendSysMessage("%u %s reported by %s %u",QID,qinfo->GetTitle(),pPlayer->GetName(),PGUID);
+        }while(result->NextRow());
+        PSendSysMessage("To test quests, type .quest add and the first id provided in this list. That will give you the quest instantly.");
+    }
+    return true;
+}
