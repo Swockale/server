@@ -360,7 +360,8 @@ bool ChatHandler::HandleBuggedQuestCommand(char* args)
     }
     else
     {
-        if(!WorldDatabase.PExecute("INSERT INTO quest_bugged VALUES (%u,%u,%u)",QuestID,isGM,pPlayer->GetObjectGuid().GetCounter()) && pPlayer->GetSession()->GetSecurity() > SEC_PLAYER)
+        WorldDatabase.PExecute("INSERT INTO quest_bugged VALUES (%u,%u,%u)",QuestID,isGM,pPlayer->GetObjectGuid().GetCounter());
+        if (isGM > 0)
             WorldDatabase.PExecute("UPDATE quest_bugged SET confirmed = 1 WHERE entry = %u",QuestID);
     }
 
