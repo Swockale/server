@@ -318,19 +318,37 @@ bool ChatHandler::HandleBuggedQuestCommand(char* args)
     if (pPlayer->GetSession()->GetSecurity() > SEC_PLAYER)
         isGM = 1;
 
+
+    std::string namepart = args;
+    std::wstring wnamepart;
+
+    // converting string that we try to find to lower case
+    if(!Utf8toWStr(namepart,wnamepart))
+        return false;
+
+    wstrToLower(wnamepart);
+
+    uint32 counter = 0 ;
+
     ObjectMgr::QuestMap const& qTemplates = sObjectMgr.GetQuestTemplates();
     for (ObjectMgr::QuestMap::const_iterator iter = qTemplates.begin(); iter != qTemplates.end(); ++iter)
     {
         Quest * qinfo = iter->second;
-        if (qinfo->GetTitle() == ExtractQuotedArg(&args))
+
+        std::string title = qinfo->GetTitle();
+        if(title.empty())
+            continue;
+
+        if (Utf8FitTo(title, wnamepart) && pPlayer->GetQuestStatus(qinfo->GetQuestId()))
+        {
             QuestID = qinfo->GetQuestId();
+            ++counter;
+        }
     }
 
-    if (!ExtractUInt32(&args,QuestID) && QuestID == 0)
-    {
-        PSendSysMessage("Must submit quest link. Add quotation marks around the quest name that will appear when you link it, or submit quest id only.");
-        return false;
-    }
+    if (counter == 0 || QuestID == 0)
+        SendSysMessage("Quest not found.");
+
 
     QueryResult* result = WorldDatabase.PQuery("SELECT confirmed FROM quest_bugged WHERE entry = %u",QuestID);
     if (result)
