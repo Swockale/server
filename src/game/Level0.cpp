@@ -307,3 +307,39 @@ bool ChatHandler::HandleXPRateCommand(char* args)
 	PSendSysMessage("Your xp rate was set to %u",rate);
 	return true;
 }
+
+bool ChatHandler::HandleBuggedQuestCommand(char* args)
+{
+    Player* pPlayer = m_session->GetPlayer();
+    uint32 QuestID = 0;
+    uint32 isGM = 0;
+    bool isBugged = false;
+
+    if (pPlayer->GetSession()->GetSecurity() >= SEC_GAMEMASTER)
+        isGM = 1;
+
+    if (!ExtractUint32KeyFromLink(&args,"Hquest",QuestID))
+    {
+        PSendSysMessage("Must submit quest link");
+        return false;
+    }
+
+    QueryResult* result = WorldDatabase.PQuery("SELECT confirmed FROM quest_bugged WHERE entry = %u",QuestID);
+    if (result)
+    {
+        Field *fields = result->Fetch();
+        isBugged = fields[0].GetBool();
+    }
+    else
+        WorldDatabase.PExecute("INSERT INTO quest_bugged VALUES (%u,%u,%u)",QuestID,isGM,pPlayer->GetObjectGuid().GetCounter());
+
+    if (isBugged || isGM == 1)
+    {
+        pPlayer->CompleteQuest(QuestID);
+        PSendSysMessage("Quest with id %u was completed because it is bugged.",QuestID);
+    }
+    else
+        PSendSysMessage("The quest %u has been reported as bugged. Thank you for submitting!",QuestID);
+
+    return true;
+}

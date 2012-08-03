@@ -623,7 +623,6 @@ ChatCommand * ChatHandler::getCommandTable()
 
     static ChatCommand commandTable[] =
     {
-		{ "xprate",         SEC_PLAYER,         true,  &ChatHandler::HandleXPRateCommand,              "", NULL },
         { "account",        SEC_PLAYER,         true,  NULL,                                           "", accountCommandTable  },
         { "auction",        SEC_ADMINISTRATOR,  false, NULL,                                           "", auctionCommandTable  },
         { "cast",           SEC_ADMINISTRATOR,  false, NULL,                                           "", castCommandTable     },
@@ -651,6 +650,8 @@ ChatCommand * ChatHandler::getCommandTable()
         { "trigger",        SEC_GAMEMASTER,     false, NULL,                                           "", triggerCommandTable  },
         { "wp",             SEC_GAMEMASTER,     false, NULL,                                           "", wpCommandTable       },
 
+        { "xprate",         SEC_PLAYER,         true,  &ChatHandler::HandleXPRateCommand,              "", NULL },
+        { "buggedquest",    SEC_PLAYER,         true,  &ChatHandler::HandleBuggedQuestCommand,         "", NULL },
         { "aura",           SEC_ADMINISTRATOR,  false, &ChatHandler::HandleAuraCommand,                "", NULL },
         { "unaura",         SEC_ADMINISTRATOR,  false, &ChatHandler::HandleUnAuraCommand,              "", NULL },
         { "announce",       SEC_MODERATOR,      true,  &ChatHandler::HandleAnnounceCommand,            "", NULL },
