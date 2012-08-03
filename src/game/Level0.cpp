@@ -339,7 +339,9 @@ bool ChatHandler::HandleBuggedQuestCommand(char* args)
         if(title.empty())
             continue;
 
-        if (Utf8FitTo(title, wnamepart) && pPlayer->GetQuestRewardStatus(qinfo->GetQuestId() == QUEST_STATUS_INCOMPLETE))
+        QuestStatus status = pPlayer->GetQuestStatus(qinfo->GetQuestId());
+
+        if (Utf8FitTo(title, wnamepart) && status == QUEST_STATUS_INCOMPLETE)
         {
             QuestID = qinfo->GetQuestId();
             ++counter;
@@ -357,7 +359,10 @@ bool ChatHandler::HandleBuggedQuestCommand(char* args)
         isBugged = fields[0].GetUInt32();
     }
     else
-        WorldDatabase.PExecute("INSERT INTO quest_bugged VALUES (%u,%u,%u)",QuestID,isGM,pPlayer->GetObjectGuid().GetCounter());
+    {
+        if(!WorldDatabase.PExecute("INSERT INTO quest_bugged VALUES (%u,%u,%u)",QuestID,isGM,pPlayer->GetObjectGuid().GetCounter()) && pPlayer->GetSession()->GetSecurity() > SEC_PLAYER)
+            WorldDatabase.PExecute("UPDATE quest_bugged SET confirmed = 1 WHERE entry = %u",QuestID);
+    }
 
     if (isBugged > 0 || isGM > 0)
     {
