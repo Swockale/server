@@ -341,7 +341,7 @@ bool ChatHandler::HandleBuggedQuestCommand(char* args)
 
         QuestStatus status = pPlayer->GetQuestStatus(qinfo->GetQuestId());
 
-        if (Utf8FitTo(title, wnamepart) && status == QUEST_STATUS_INCOMPLETE)
+        if (Utf8FitTo(title, wnamepart) && (status != QUEST_STATUS_NONE || status != QUEST_STATUS_COMPLETE || status != LANG_COMMAND_QUEST_REWARDED))
         {
             QuestID = qinfo->GetQuestId();
             ++counter;
