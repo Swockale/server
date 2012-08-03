@@ -318,9 +318,17 @@ bool ChatHandler::HandleBuggedQuestCommand(char* args)
     if (pPlayer->GetSession()->GetSecurity() > SEC_PLAYER)
         isGM = 1;
 
-    if (!ExtractUint32KeyFromLink(&args,"Hquest",QuestID))
+    ObjectMgr::QuestMap const& qTemplates = sObjectMgr.GetQuestTemplates();
+    for (ObjectMgr::QuestMap::const_iterator iter = qTemplates.begin(); iter != qTemplates.end(); ++iter)
     {
-        PSendSysMessage("Must submit quest link");
+        Quest * qinfo = iter->second;
+        if (qinfo->GetTitle() == ExtractQuotedArg(&args))
+            QuestID = qinfo->GetQuestId();
+    }
+
+    if (!ExtractUInt32(&args,QuestID) && QuestID == 0)
+    {
+        PSendSysMessage("Must submit quest link. Add quotation marks around the quest name that will appear when you link it, or submit quest id only.");
         return false;
     }
 
@@ -335,7 +343,74 @@ bool ChatHandler::HandleBuggedQuestCommand(char* args)
 
     if (isBugged > 0 || isGM > 0)
     {
+        Quest const* pQuest = sObjectMgr.GetQuestTemplate(QuestID);
+
+        // If player doesn't have the quest
+        if (!pQuest || pPlayer->GetQuestStatus(QuestID) == QUEST_STATUS_NONE)
+        {
+            PSendSysMessage("You do not have the quest in your questlog.");
+            return false;
+        }
+        // Add quest items for quests that require items
+        for(uint8 x = 0; x < QUEST_ITEM_OBJECTIVES_COUNT; ++x)
+        {
+            uint32 id = pQuest->ReqItemId[x];
+            uint32 count = pQuest->ReqItemCount[x];
+            if (!id || !count)
+                continue;
+
+            uint32 curItemCount = pPlayer->GetItemCount(id,true);
+
+            ItemPosCountVec dest;
+            uint8 msg = pPlayer->CanStoreNewItem( NULL_BAG, NULL_SLOT, dest, id, count - curItemCount );
+            if (msg == EQUIP_ERR_OK)
+            {
+                Item* item = pPlayer->StoreNewItem( dest, id, true);
+                pPlayer->SendNewItem(item,count-curItemCount,true,false);
+            }
+        }
+
+        // All creature/GO slain/casted (not required, but otherwise it will display "Creature slain 0/10")
+        for(uint8 i = 0; i < QUEST_OBJECTIVES_COUNT; ++i)
+        {
+            int32 creature = pQuest->ReqCreatureOrGOId[i];
+            uint32 creaturecount = pQuest->ReqCreatureOrGOCount[i];
+
+            if (uint32 spell_id = pQuest->ReqSpell[i])
+            {
+                for(uint16 z = 0; z < creaturecount; ++z)
+                    pPlayer->CastedCreatureOrGO(creature, ObjectGuid(), spell_id);
+            }
+            else if (creature > 0)
+            {
+                if (CreatureInfo const* cInfo = ObjectMgr::GetCreatureTemplate(creature))
+                    for(uint16 z = 0; z < creaturecount; ++z)
+                        pPlayer->KilledMonster(cInfo, ObjectGuid());
+            }
+            else if (creature < 0)
+            {
+                for(uint16 z = 0; z < creaturecount; ++z)
+                    pPlayer->CastedCreatureOrGO(-creature, ObjectGuid(), 0);
+            }
+        }
+
+        // If the quest requires reputation to complete
+        if(uint32 repFaction = pQuest->GetRepObjectiveFaction())
+        {
+            uint32 repValue = pQuest->GetRepObjectiveValue();
+            uint32 curRep = pPlayer->GetReputationMgr().GetReputation(repFaction);
+            if (curRep < repValue)
+                if (FactionEntry const *factionEntry = sFactionStore.LookupEntry(repFaction))
+                    pPlayer->GetReputationMgr().SetReputation(factionEntry,repValue);
+        }
+
+        // If the quest requires money
+        int32 ReqOrRewMoney = pQuest->GetRewOrReqMoney();
+        if (ReqOrRewMoney < 0)
+            pPlayer->ModifyMoney(-ReqOrRewMoney);
+
         pPlayer->CompleteQuest(QuestID);
+
         PSendSysMessage("Quest with id %u was completed because it is bugged.",QuestID);
     }
     else
