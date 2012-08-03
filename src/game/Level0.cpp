@@ -313,9 +313,9 @@ bool ChatHandler::HandleBuggedQuestCommand(char* args)
     Player* pPlayer = m_session->GetPlayer();
     uint32 QuestID = 0;
     uint32 isGM = 0;
-    bool isBugged = false;
+    uint32 isBugged = 0;
 
-    if (pPlayer->GetSession()->GetSecurity() >= SEC_GAMEMASTER)
+    if (pPlayer->GetSession()->GetSecurity() > SEC_PLAYER)
         isGM = 1;
 
     if (!ExtractUint32KeyFromLink(&args,"Hquest",QuestID))
@@ -328,12 +328,12 @@ bool ChatHandler::HandleBuggedQuestCommand(char* args)
     if (result)
     {
         Field *fields = result->Fetch();
-        isBugged = fields[0].GetBool();
+        isBugged = fields[0].GetUInt32();
     }
     else
         WorldDatabase.PExecute("INSERT INTO quest_bugged VALUES (%u,%u,%u)",QuestID,isGM,pPlayer->GetObjectGuid().GetCounter());
 
-    if (isBugged || isGM == 1)
+    if (isBugged > 0 || isGM > 0)
     {
         pPlayer->CompleteQuest(QuestID);
         PSendSysMessage("Quest with id %u was completed because it is bugged.",QuestID);
