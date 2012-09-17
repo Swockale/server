@@ -25,6 +25,9 @@
     <Filter Include="vmaps">
       <UniqueIdentifier>{948284d3-9d89-4609-8cdd-28a213edb53e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Playerbot">
+      <UniqueIdentifier>{9effcdf1-d41b-4436-816c-1670e0d7f9e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\game\AccountMgr.cpp">
@@ -430,7 +433,42 @@
     <ClCompile Include="..\..\src\game\vmap\WorldModel.cpp">
       <Filter>vmaps</Filter>
     </ClCompile>
-
+    <ClCompile Include="..\..\src\game\playerbot\AiFactory.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\playerbot\ChatFilter.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\playerbot\ChatHelper.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\playerbot\FleeManager.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\playerbot\Helpers.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\playerbot\LootObjectStack.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\playerbot\PlayerbotAI.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\playerbot\PlayerbotAIBase.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\playerbot\PlayerbotAIConfig.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\playerbot\PlayerbotFactory.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\playerbot\PlayerbotMgr.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game\playerbot\RandomPlayerbotMgr.cpp">
+      <Filter>Playerbot</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\game\AccountMgr.h">
@@ -821,5 +859,55 @@
     <ClInclude Include="..\..\src\game\vmap\WorldModel.h">
       <Filter>vmaps</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\AiFactory.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\ChatFilter.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\ChatHelper.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\FleeManager.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\LazyCalculatedValue.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\LootObjectStack.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\playerbot.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotAI.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotAIAware.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotAIBase.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotAIConfig.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\playerbotDefs.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotFactory.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotMgr.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\game\playerbot\RandomPlayerbotMgr.h">
+      <Filter>Playerbot</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\game\playerbot\aiplayerbot.conf.dist.in">
+      <Filter>Playerbot</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -441,6 +441,18 @@
     <ClCompile Include="..\..\src\game\PetHandler.cpp" />
     <ClCompile Include="..\..\src\game\PetitionsHandler.cpp" />
     <ClCompile Include="..\..\src\game\Player.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\AiFactory.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\ChatFilter.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\ChatHelper.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\FleeManager.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\Helpers.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\LootObjectStack.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\PlayerbotAI.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\PlayerbotAIBase.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\PlayerbotAIConfig.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\PlayerbotFactory.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\PlayerbotMgr.cpp" />
+    <ClCompile Include="..\..\src\game\playerbot\RandomPlayerbotMgr.cpp" />
     <ClCompile Include="..\..\src\game\PlayerDump.cpp" />
     <ClCompile Include="..\..\src\game\PointMovementGenerator.cpp" />
     <ClCompile Include="..\..\src\game\PoolManager.cpp" />
@@ -573,6 +585,21 @@
     <ClInclude Include="..\..\src\game\Pet.h" />
     <ClInclude Include="..\..\src\game\PetAI.h" />
     <ClInclude Include="..\..\src\game\Player.h" />
+    <ClInclude Include="..\..\src\game\playerbot\AiFactory.h" />
+    <ClInclude Include="..\..\src\game\playerbot\ChatFilter.h" />
+    <ClInclude Include="..\..\src\game\playerbot\ChatHelper.h" />
+    <ClInclude Include="..\..\src\game\playerbot\FleeManager.h" />
+    <ClInclude Include="..\..\src\game\playerbot\LazyCalculatedValue.h" />
+    <ClInclude Include="..\..\src\game\playerbot\LootObjectStack.h" />
+    <ClInclude Include="..\..\src\game\playerbot\playerbot.h" />
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotAI.h" />
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotAIAware.h" />
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotAIBase.h" />
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotAIConfig.h" />
+    <ClInclude Include="..\..\src\game\playerbot\playerbotDefs.h" />
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotFactory.h" />
+    <ClInclude Include="..\..\src\game\playerbot\PlayerbotMgr.h" />
+    <ClInclude Include="..\..\src\game\playerbot\RandomPlayerbotMgr.h" />
     <ClInclude Include="..\..\src\game\PlayerDump.h" />
     <ClInclude Include="..\..\src\game\PointMovementGenerator.h" />
     <ClInclude Include="..\..\src\game\PoolManager.h" />
@@ -627,6 +654,9 @@
     <ProjectReference Include="g3dlite.vcxproj">
       <Project>{8072769E-CF10-48BF-B9E1-12752A5DAC6E}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\game\playerbot\aiplayerbot.conf.dist.in" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

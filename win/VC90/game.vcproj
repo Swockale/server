@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="game"
 	ProjectGUID="{1DC6C4DA-A028-41F3-877D-D5400C594F88}"
 	RootNamespace="game"
@@ -731,11 +731,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\game\MailHandler.cpp"
+				RelativePath="..\..\src\game\Mail.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\game\Mail.h"
+				RelativePath="..\..\src\game\MailHandler.cpp"
 				>
 			</File>
 			<File
@@ -879,10 +879,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\game\UnitAuraProcHandler.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\game\SpellEffects.cpp"
 				>
 			</File>
@@ -904,6 +900,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\game\Transports.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\UnitAuraProcHandler.cpp"
 				>
 			</File>
 			<File
@@ -1596,6 +1596,118 @@
 			</File>
 			<File
 				RelativePath="..\..\src\game\vmap\WorldModel.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="playerbot"
+			>
+			<File
+				RelativePath="..\..\src\game\playerbot\AiFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\AiFactory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\ChatFilter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\ChatFilter.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\ChatHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\ChatHelper.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\FleeManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\FleeManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\Helpers.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\LazyCalculatedValue.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\LootObjectStack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\LootObjectStack.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\playerbot.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\PlayerbotAI.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\PlayerbotAI.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\PlayerbotAIAware.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\PlayerbotAIBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\PlayerbotAIBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\PlayerbotAIConfig.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\PlayerbotAIConfig.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\playerbotDefs.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\PlayerbotFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\PlayerbotFactory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\PlayerbotMgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\PlayerbotMgr.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\RandomPlayerbotMgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\game\playerbot\RandomPlayerbotMgr.h"
 				>
 			</File>
 		</Filter>
